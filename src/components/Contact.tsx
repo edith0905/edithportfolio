@@ -9,7 +9,7 @@ import {
 } from "react-icons/fi";
 
 interface ContactProps {
-  contactRef: React.RefObject<HTMLElement>;
+  contactRef: React.RefObject<HTMLElement | null>;
 }
 
 export function Contact({ contactRef }: ContactProps) {

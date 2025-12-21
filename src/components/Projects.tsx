@@ -5,7 +5,7 @@ import Image from "next/image";
 import { FiArrowUpRight } from "react-icons/fi";
 
 interface ProjectsProps {
-  projectsRef: React.RefObject<HTMLElement>;
+  projectsRef: React.RefObject<HTMLElement | null>;
 }
 
 interface Project {

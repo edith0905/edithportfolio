@@ -8,7 +8,7 @@ import {
 } from "react-icons/fa";
 
 interface AboutProps {
-  aboutRef: React.RefObject<HTMLElement>;
+  aboutRef: React.RefObject<HTMLElement | null>;
 }
 
 const fadeUp = {

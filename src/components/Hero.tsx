@@ -1,51 +1,96 @@
 "use client";
 
 import { motion } from "framer-motion";
+import Image from "next/image";
 
 interface HeroProps {
-  projectsRef: React.RefObject<HTMLElement>;
+  accueilRef: React.RefObject<HTMLElement | null>;
+  projectsRef: React.RefObject<HTMLElement | null>;
 }
 
-export function Hero({ projectsRef }: HeroProps) {
-  // Variants simplifiés pour éviter les erreurs de type
-  const fadeUp = {
-    hidden: { opacity: 0, y: 30 },
-    visible: { opacity: 1, y: 0, transition: { duration: 0.6, ease: "easeOut" } },
-  };
+const fadeUp = {
+  hidden: { opacity: 0, y: 40 },
+  visible: { opacity: 1, y: 0 },
+};
 
+export function Hero({ accueilRef, projectsRef }: HeroProps) {
   return (
     <motion.section
-      className="h-screen flex flex-col justify-center items-start text-start max-w-3xl px-6"
+      id="accueil"
+      ref={accueilRef}
+      className="min-h-screen flex items-center px-6 max-w-6xl mx-auto"
       initial="hidden"
       animate="visible"
-      variants={{ visible: { transition: { staggerChildren: 0.3 } } }} // Variants pour stagger (décalage des enfants)
+      variants={{ visible: { transition: { staggerChildren: 0.25 } } }}
     >
-      <motion.h2
-        className="text-5xl font-extrabold mb-4 text-sky-900/90"
-        variants={fadeUp}
-        transition={{ delay: 0 }} // Delay manuel au lieu de custom
-      >
-        Créative <span className="text-sky-700">et Développeuse</span>
-      </motion.h2>
-      <motion.p
-        className="text-lg text-gray-700 mb-8"
-        variants={fadeUp}
-        transition={{ delay: 0.2 }} // Delay pour stagger
-      >
-        I create digital experiences that inspire and engage. <br />
-        With a passion for clean design and innovative solutions,<br />
-        I transform ideas into beautiful, functional realities.
-      </motion.p>
-      <motion.button
-        onClick={() => projectsRef.current?.scrollIntoView({ behavior: "smooth" })}
-        className="px-6 py-3 bg-sky-700 rounded-full text-white hover:bg-sky-900/90 transition"
-        variants={fadeUp}
-        transition={{ delay: 0.4 }} // Delay pour stagger
-        whileHover={{ scale: 1.05, boxShadow: "0 0 8px rgb(14 165 233)" }}
-        whileTap={{ scale: 0.95 }}
-      >
-        Voir mes projets
-      </motion.button>
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-12 gap-x-6 items-center w-full">
+
+        {/* TEXTE – STYLE INCHANGÉ */}
+        <div>
+          <motion.h1
+            className="text-3xl md:text-6xl font-extrabold text-sky-900 mb-6 text-nowrap"
+            variants={fadeUp}
+          >
+            Développeuse Web <br />
+            <span className="block mt-2 text-2xl md:text-5xl text-sky-600">
+              Créative & Passionnée
+            </span>
+          </motion.h1>
+
+
+          <motion.p
+            className="text-lg md:text-xl text-gray-700 max-w-2xl mb-10"
+            variants={fadeUp}
+          >
+            Je conçois des expériences digitales modernes, performantes et
+            élégantes. Spécialisée en React & Next.js, je transforme vos idées en
+            solutions concrètes.
+          </motion.p>
+
+          <motion.div className="flex flex-wrap gap-4" variants={fadeUp}>
+            <motion.button
+              onClick={() =>
+                projectsRef.current?.scrollIntoView({ behavior: "smooth" })
+              }
+              className="px-8 py-4 bg-sky-600 text-white rounded-full font-medium hover:bg-sky-700 transition"
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+            >
+              Voir mes projets
+            </motion.button>
+
+            <motion.a
+              href="/cv.pdf"
+              className="px-8 py-4 border border-sky-600 text-sky-600 rounded-full font-medium hover:bg-sky-50 transition"
+              whileHover={{ scale: 1.05 }}
+            >
+              Télécharger mon CV
+            </motion.a>
+          </motion.div>
+        </div>
+
+        {/* IMAGE – À DROITE */}
+        <motion.div
+          variants={fadeUp}
+          className="relative flex justify-center md:justify-end"
+        >
+          {/* CADRE ARRIÈRE */}
+          <div className="absolute z-0 w-[340px] h-[340px] md:w-[380px] md:h-[380px] rounded-xl bg-sky-600 translate-x-4 translate-y-4 opacity-20" />
+
+          {/* IMAGE */}
+          <div className="relative z-10 w-[340px] h-[340px] md:w-[380px] md:h-[380px] rounded-xl overflow-hidden shadow-xl border border-sky-200 bg-white">
+            <Image
+              src="/photos/profile.jpg"
+              alt="Ama Kuatcha"
+              fill
+              priority
+              className="object-cover"
+            />
+          </div>
+        </motion.div>
+
+
+      </div>
     </motion.section>
   );
 }

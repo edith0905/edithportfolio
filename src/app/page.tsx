@@ -7,20 +7,30 @@ import { About } from "@/components/About";
 import { Projects } from "@/components/Projects";
 import { Contact } from "@/components/Contact";
 import { Footer } from "@/components/Footer";
+import { Skills } from "@/components/Skills";
 
 export default function HomePage() {
-  const accueilRef = useRef<HTMLElement | null>(null);
-  const aboutRef = useRef<HTMLElement | null>(null);
-  const projectsRef = useRef<HTMLElement | null>(null);
-  const contactRef = useRef<HTMLElement | null>(null);
+  const sections = {
+    accueil: useRef<HTMLElement | null>(null),
+    about: useRef<HTMLElement | null>(null),
+    projects: useRef<HTMLElement | null>(null),
+    contact: useRef<HTMLElement | null>(null),
+  };
 
   return (
-    <main className="flex flex-col items-center bg-sky-50 min-h-screen">
-      <Navbar refs={{ accueil: accueilRef, about: aboutRef, projects: projectsRef, contact: contactRef }} />
-      <Hero projectsRef={projectsRef} />
-      <About aboutRef={aboutRef} />
-      <Projects projectsRef={projectsRef} />
-      <Contact contactRef={contactRef} />
+    <main className="flex flex-col bg-sky-50 min-h-screen">
+      <Navbar refs={sections} />
+
+      <Hero
+        accueilRef={sections.accueil}
+        projectsRef={sections.projects}
+      />
+
+      <About aboutRef={sections.about} />
+      <Skills />
+      <Projects projectsRef={sections.projects} />
+      <Contact contactRef={sections.contact} />
+
       <Footer />
     </main>
   );

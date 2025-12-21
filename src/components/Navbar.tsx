@@ -1,22 +1,20 @@
 "use client";
 
-import { 
-    NavigationMenu, 
-    NavigationMenuList, 
-    NavigationMenuItem, 
-    NavigationMenuLink 
+import {
+  NavigationMenu,
+  NavigationMenuList,
+  NavigationMenuItem,
 } from "@/components/ui/navigation-menu";
-import Link from "next/link"
-// import Image from "next/image";
-import { 
-  FaGithub, 
-  FaLinkedin,
-  FaBars, // Pour le menu hamburger mobile
-} from "react-icons/fa";
-import { useState, useEffect } from "react"; // Pour gérer le menu mobile
+import Link from "next/link";
+import { FaGithub, FaLinkedin, FaBars } from "react-icons/fa";
+import { useEffect, useState } from "react";
+import { motion } from "framer-motion";
+
+type SectionKey = "accueil" | "about" | "projects" | "contact";
 
 type NavbarProps = {
   refs: {
+    accueil: React.RefObject<HTMLElement>;
     about: React.RefObject<HTMLElement>;
     projects: React.RefObject<HTMLElement>;
     contact: React.RefObject<HTMLElement>;
@@ -24,152 +22,132 @@ type NavbarProps = {
 };
 
 export function Navbar({ refs }: NavbarProps) {
-  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false); // État pour le menu mobile
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isSticky, setIsSticky] = useState(false);
+  const [activeSection, setActiveSection] = useState<SectionKey>("accueil");
 
-  const scrollTo = (ref: React.RefObject<HTMLElement>) => {
-    ref.current?.scrollIntoView({ behavior: "smooth" });
-    setIsMobileMenuOpen(false); // Fermer le menu mobile après clic
+  // Scroll smooth
+  const scrollTo = (key: SectionKey) => {
+    refs[key].current?.scrollIntoView({ behavior: "smooth" });
+    setIsMobileMenuOpen(false);
   };
 
+  // Sticky navbar
   useEffect(() => {
-    const handleScroll = () => {
-      setIsSticky(window.scrollY > 0);
-    };
+    const handleScroll = () => setIsSticky(window.scrollY > 20);
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
+  // Scroll spy (section active)
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            setActiveSection(entry.target.id as SectionKey);
+          }
+        });
+      },
+      { threshold: 0.6 }
+    );
+
+    Object.values(refs).forEach((ref) => {
+      if (ref.current) observer.observe(ref.current);
+    });
+
+    return () => observer.disconnect();
+  }, [refs]);
+
+  const navItems: { key: SectionKey; label: string }[] = [
+    { key: "accueil", label: "Accueil" },
+    { key: "about", label: "A propos" },
+    { key: "projects", label: "Mes Réalisations" },
+    { key: "contact", label: "Contact" },
+  ];
+
   return (
-    <nav  className={`fixed top-0 left-0 right-0 h-20 flex items-center justify-between px-6 py-4 z-50 transition-all duration-300 ${
-    isSticky ? "backdrop-blur-md shadow-sm border-gray-700/50" : ""
-    }`}
+    <motion.nav
+      initial={{ y: -80, opacity: 0 }}
+      animate={{ y: 0, opacity: 1 }}
+      transition={{ duration: 0.6 }}
+      className={`fixed top-0 left-0 right-0 z-50 h-20 px-7 max-w-6xl mx-auto flex items-center justify-between transition-all ${
+        isSticky
+          ? "bg-white/80 backdrop-blur-md shadow-sm mx-12 top-3 max-w-6xl rounded-full"
+          : "bg-transparent max-w-6xl"
+      }`}
     >
+      {/* LOGO */}
+      <Link href="/" className="text-3xl font-bold text-sky-900">
+        Ama
+      </Link>
 
-      {/* Section centrale : Nom */}
-      <div className="flex items-center">
-        <Link href="/" className="text-4xl font-bold hover:text-blue-500 transition-colors duration-300">
-          <h1 className="text-4xl font-bold text-sky-700">Ama Kuatcha</h1>
-        </Link>
-        
+      {/* DESKTOP MENU */}
+      <div className="hidden md:flex items-center gap-8">
+        <NavigationMenu>
+          <NavigationMenuList className="flex gap-8">
+            {navItems.map(({ key, label }) => (
+              <NavigationMenuItem key={key}>
+                <button
+                  onClick={() => scrollTo(key)}
+                  className={`relative text-lg font-medium transition ${
+                    activeSection === key
+                      ? "text-sky-700"
+                      : "text-gray-700 hover:text-sky-600"
+                  }`}
+                >
+                  {label}
+                  {activeSection === key && (
+                    <motion.span
+                      layoutId="underline"
+                      className="absolute -bottom-2 left-0 right-0 h-[2px] bg-sky-600 rounded"
+                    />
+                  )}
+                </button>
+              </NavigationMenuItem>
+            ))}
+          </NavigationMenuList>
+        </NavigationMenu>
       </div>
 
-      {/* Section : Navigation */}
-      <div className="flex items-center">
-        <nav className="hidden md:flex ">
-          <NavigationMenu>
-            <NavigationMenuList className="flex gap-6">
-              <NavigationMenuItem>
-                <NavigationMenuLink
-                  className="text-gray-800 hover:text-blue-500 transition-colors duration-300 cursor-pointer font-medium text-xl"
-                  onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
-                >
-                  Accueil
-                </NavigationMenuLink>
-              </NavigationMenuItem>
-              <NavigationMenuItem>
-                <NavigationMenuLink
-                  className="text-gray-800 hover:text-blue-500 transition-colors duration-300 cursor-pointer font-medium text-xl"
-                  onClick={() => scrollTo(refs.about)}
-                >
-                  A propos
-                </NavigationMenuLink>
-              </NavigationMenuItem>
-              <NavigationMenuItem>
-                <NavigationMenuLink
-                  className="text-gray-800 hover:text-blue-500 transition-colors duration-300 cursor-pointer font-medium text-xl"
-                  onClick={() => scrollTo(refs.projects)}
-                >
-                  Mon CV
-                </NavigationMenuLink>
-              </NavigationMenuItem>
-              <NavigationMenuItem>
-                <NavigationMenuLink
-                  className="text-gray-800 hover:text-blue-500 transition-colors duration-300 cursor-pointer font-medium text-xl"
-                  onClick={() => scrollTo(refs.projects)}
-                >
-                  Mes projets
-                </NavigationMenuLink>
-              </NavigationMenuItem>
-              <NavigationMenuItem>
-                <NavigationMenuLink
-                  className="text-gray-800 hover:text-blue-500 transition-colors duration-300 cursor-pointer font-medium text-xl"
-                  onClick={() => scrollTo(refs.contact)}
-                >
-                  Contact
-                </NavigationMenuLink>
-              </NavigationMenuItem>
-            </NavigationMenuList>
-          </NavigationMenu>
-        </nav>
-        {/* Menu hamburger pour mobile */}
-        <button
-          className="md:hidden text-gray-800 text-xl transition-transform duration-300 hover:scale-110"
-          onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-        >
-          <FaBars />
-        </button>
-      </div>
-
-      
-
-      {/* Section droite : Icônes réseaux sociaux */}
-      <div className="flex items-center gap-4">
-        <a
-          href="https://github.com/tonprofil"
-          target="_blank"
-          rel="noopener noreferrer"
-          className="text-gray-800 hover:text-blue-500 text-4xl transition-colors duration-300"
-        >
+      {/* SOCIAL */}
+      <div className="hidden md:flex gap-4 text-2xl text-gray-700">
+        <a href="#" className="hover:text-sky-600 transition">
           <FaGithub />
         </a>
-        <a
-          href="https://linkedin.com/in/tonprofil"
-          target="_blank"
-          rel="noopener noreferrer"
-          className="text-gray-800 hover:text-blue-500 text-4xl transition-colors duration-300"
-        >
+        <a href="#" className="hover:text-sky-600 transition">
           <FaLinkedin />
         </a>
       </div>
 
-      {/* Menu mobile déroulant */}
+      {/* MOBILE */}
+      <button
+        className="md:hidden text-2xl"
+        onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+      >
+        <FaBars />
+      </button>
+
+      {/* MOBILE MENU */}
       {isMobileMenuOpen && (
-        <div className="absolute top-16 left-0 right-0 bg-white/95 backdrop-blur-sm border-b border-gray-200/20 md:hidden shadow-sm">
-          <nav className="flex flex-col items-center py-4 space-y-4">
-            <NavigationMenuLink
-              className="text-gray-800 hover:text-blue-500 transition-colors duration-300 cursor-pointer font-medium"
-              onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
-            >
-              Accueil
-            </NavigationMenuLink>
-            <NavigationMenuLink
-              className="text-gray-800 hover:text-blue-500 transition-colors duration-300 cursor-pointer font-medium"
-              onClick={() => scrollTo(refs.about)}
-            >
-              À propos
-            </NavigationMenuLink>
-            <NavigationMenuLink
-              className="text-gray-800 hover:text-blue-500 transition-colors duration-300 cursor-pointer font-medium"
-              onClick={() => scrollTo(refs.projects)}
-            >
-              Mon CV
-            </NavigationMenuLink>
-            <NavigationMenuLink
-              className="text-gray-800 hover:text-blue-500 transition-colors duration-300 cursor-pointer font-medium"
-              onClick={() => scrollTo(refs.projects)}
-            >
-              Mes projets
-            </NavigationMenuLink>
-            <NavigationMenuLink
-              className="text-gray-800 hover:text-blue-500 transition-colors duration-300 cursor-pointer font-medium"
-              onClick={() => scrollTo(refs.contact)}
-            >
-              Contact
-            </NavigationMenuLink>
-          </nav>
-        </div>
+        <motion.div
+          initial={{ opacity: 0, y: -10 }}
+          animate={{ opacity: 1, y: 0 }}
+          className="absolute top-20 left-0 right-0 bg-white shadow-md md:hidden"
+        >
+          <div className="flex flex-col items-center py-6 gap-4">
+            {navItems.map(({ key, label }) => (
+              <button
+                key={key}
+                onClick={() => scrollTo(key)}
+                className="text-lg font-medium text-gray-700 hover:text-sky-600"
+              >
+                {label}
+              </button>
+            ))}
+          </div>
+        </motion.div>
       )}
-    </nav>
+    </motion.nav>
   );
 }

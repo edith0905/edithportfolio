@@ -14,12 +14,13 @@ type SectionKey = "accueil" | "about" | "projects" | "contact";
 
 type NavbarProps = {
   refs: {
-    accueil: React.RefObject<HTMLElement>;
-    about: React.RefObject<HTMLElement>;
-    projects: React.RefObject<HTMLElement>;
-    contact: React.RefObject<HTMLElement>;
+    accueil: React.RefObject<HTMLElement | null>;
+    about: React.RefObject<HTMLElement | null>;
+    projects: React.RefObject<HTMLElement | null>;
+    contact: React.RefObject<HTMLElement | null>;
   };
 };
+
 
 export function Navbar({ refs }: NavbarProps) {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);

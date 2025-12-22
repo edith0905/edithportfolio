@@ -18,25 +18,25 @@ interface Project {
 
 const projects: Project[] = [
   {
-    title: "E-Learning Platform",
-    category: "Development",
-    description: "Plateforme e-learning moderne avec dashboard et gestion des cours.",
-    image: "/projects/elearning.jpg",
-    link: "http://46.202.128.207",
-  },
-  {
-    title: "Application de gestion",
+    title: "Site vitrine avec backend",
     category: "Web App",
-    description: "Dashboard de gestion avec authentification sécurisée.",
-    image: "/projects/dashboard.jpg",
-    link: "#",
+    description: "Plateforme de présentation de couture",
+    image: "/images/kaayane-empreinte.png",
+    link: "http://46.202.128.207",
   },
   {
     title: "Site vitrine",
     category: "Website",
-    description: "Site responsive optimisé SEO pour entreprise locale.",
-    image: "/projects/vitrine.jpg",
-    link: "#",
+    description: "Site de présentation d'un produit innovant",
+    image: "/images/demposir.jpg",
+    link: "demposir.kalamar.xyz",
+  },
+  {
+    title: "Site vitrine",
+    category: "Website",
+    description: "Site responsive optimisé SEO pour entreprise.",
+    image: "/images/sitelso.jpg",
+    link: "sitelso.net",
   },
 ];
 

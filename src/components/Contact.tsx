@@ -82,7 +82,7 @@ export function Contact({ contactRef }: ContactProps) {
                       Localisation
                     </h4>
                     <p className="text-sm text-sky-100">
-                      Lomé, Togo
+                      Agoè-Télessou, Lomé, Togo
                     </p>
                   </div>
                 </div>
@@ -97,7 +97,7 @@ export function Contact({ contactRef }: ContactProps) {
                       Téléphone
                     </h4>
                     <p className="text-sm text-sky-100">
-                      +228 90 00 00 00
+                      +228 90 09 02 40
                     </p>
                   </div>
                 </div>
@@ -112,7 +112,7 @@ export function Contact({ contactRef }: ContactProps) {
                       Email
                     </h4>
                     <p className="text-sm text-sky-100">
-                      ama@email.com
+                      ehloedith00@gmail.com
                     </p>
                   </div>
                 </div>

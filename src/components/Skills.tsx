@@ -7,7 +7,7 @@ import {
   FaNodeJs,
   FaGitAlt,
   FaHtml5,
-  FaCss3Alt,
+  // FaCss3Alt,
 } from "react-icons/fa";
 import {
   SiNextdotjs,
@@ -27,19 +27,19 @@ interface Skill {
 /* ================= DATA ================= */
 
 const frontendSkills: Skill[] = [
-  { name: "HTML / CSS", level: 95, icon: <FaHtml5 /> },
-  { name: "CSS", level: 95, icon: <FaCss3Alt /> },
-  { name: "JavaScript", level: 85, icon: <FaReact /> },
-  { name: "TypeScript", level: 80, icon: <SiTypescript /> },
-  { name: "React", level: 85, icon: <FaReact /> },
-  { name: "Next.js", level: 80, icon: <SiNextdotjs /> },
-  { name: "Tailwind CSS", level: 90, icon: <SiTailwindcss /> },
+  { name: "HTML / CSS", level: 80, icon: <FaHtml5 /> },
+  { name: "Tailwind CSS", level: 80, icon: <SiTailwindcss /> },
+  { name: "Next.js", level: 50, icon: <SiNextdotjs /> },
+  { name: "JavaScript", level: 45, icon: <FaReact /> },
+  { name: "React", level: 20, icon: <FaReact /> },
+  { name: "TypeScript", level: 10, icon: <SiTypescript /> },
+  
 ];
 
 const backendSkills: Skill[] = [
-  { name: "Node.js", level: 75, icon: <FaNodeJs /> },
-  { name: "MongoDB", level: 70, icon: <SiMongodb /> },
-  { name: "Git", level: 85, icon: <FaGitAlt /> },
+  { name: "Git", level: 80, icon: <FaGitAlt /> },
+  { name: "Django", level: 60, icon: <FaNodeJs /> },
+  { name: "MySQL", level: 25, icon: <SiMongodb /> },
 ];
 
 /* ================= COMPONENTS ================= */

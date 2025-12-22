@@ -43,7 +43,7 @@ export function Hero({ accueilRef, projectsRef }: HeroProps) {
             variants={fadeUp}
           >
             Je conçois des expériences digitales modernes, performantes et
-            élégantes. Spécialisée en React & Next.js, je transforme vos idées en
+            élégantes. Je transforme vos idées en
             solutions concrètes.
           </motion.p>
 
@@ -56,11 +56,11 @@ export function Hero({ accueilRef, projectsRef }: HeroProps) {
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
             >
-              Voir mes projets
+              Voir mes réalisations
             </motion.button>
 
             <motion.a
-              href="/cv.pdf"
+              href="/EHLO-Edith-CV.pdf"
               className="px-8 py-4 border border-sky-600 text-sky-600 rounded-full font-medium hover:bg-sky-50 transition"
               whileHover={{ scale: 1.05 }}
             >

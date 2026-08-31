@@ -16,6 +16,11 @@ interface Project {
   link: string;
 }
 
+function toAbsoluteUrl(url: string): string {
+  if (/^https?:\/\//i.test(url)) return url;
+  return `https://${url.replace(/^\/+/, "")}`;
+}
+
 const projects: Project[] = [
   {
     title: "Site vitrine avec backend",
@@ -29,14 +34,14 @@ const projects: Project[] = [
     category: "Website",
     description: "Site de présentation d'un produit innovant",
     image: "/images/demposir.jpg",
-    link: "demposir.kalamar.xyz",
+    link: "https://demposir.kalamar.xyz/",
   },
   {
-    title: "Site vitrine",
+    title: "Site vitrine avec django",
     category: "Website",
     description: "Site responsive optimisé SEO pour entreprise.",
     image: "/images/sitelso.jpg",
-    link: "sitelso.net",
+    link: "https://sitelso.net/fr/",
   },
 ];
 
@@ -97,7 +102,7 @@ export function Projects({ projectsRef }: ProjectsProps) {
                 </p>
 
                 <a
-                  href={project.link}
+                  href={toAbsoluteUrl(project.link)}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="inline-flex items-center gap-2 text-sm font-medium text-white w-fit"

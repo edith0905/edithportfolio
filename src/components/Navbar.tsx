@@ -80,7 +80,7 @@ export function Navbar({ refs }: NavbarProps) {
     >
       {/* LOGO */}
       <Link href="/" className="text-3xl font-bold text-sky-900">
-        Ama
+        Edith
       </Link>
 
       {/* DESKTOP MENU */}
@@ -91,9 +91,9 @@ export function Navbar({ refs }: NavbarProps) {
               <NavigationMenuItem key={key}>
                 <button
                   onClick={() => scrollTo(key)}
-                  className={`relative text-lg font-medium transition ${
+                  className={`relative text-lg font-medium cursor-pointer transition ${
                     activeSection === key
-                      ? "text-sky-700"
+                      ? "text-sky-900"
                       : "text-gray-700 hover:text-sky-600"
                   }`}
                 >
@@ -141,7 +141,7 @@ export function Navbar({ refs }: NavbarProps) {
               <button
                 key={key}
                 onClick={() => scrollTo(key)}
-                className="text-lg font-medium text-gray-700 hover:text-sky-600"
+                className="text-lg font-medium text-gray-900 hover:text-sky-600"
               >
                 {label}
               </button>

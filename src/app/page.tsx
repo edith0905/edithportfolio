@@ -18,7 +18,7 @@ export default function HomePage() {
   };
 
   return (
-    <main className="flex flex-col bg-sky-50 min-h-screen">
+    <main className="flex flex-col bg-linear-to-r from-sky-50 to-sky-200 min-h-screen">
       <Navbar refs={sections} />
 
       <Hero

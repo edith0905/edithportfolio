@@ -52,7 +52,7 @@ export function Hero({ accueilRef, projectsRef }: HeroProps) {
               onClick={() =>
                 projectsRef.current?.scrollIntoView({ behavior: "smooth" })
               }
-              className="px-8 py-4 bg-sky-600 text-white rounded-full font-medium hover:bg-sky-700 transition"
+              className="px-8 py-4 bg-sky-600 text-white rounded-full font-medium hover:bg-sky-700 cursor-pointer transition"
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
             >
@@ -78,13 +78,13 @@ export function Hero({ accueilRef, projectsRef }: HeroProps) {
           <div className="absolute z-0 w-[340px] h-[340px] md:w-[380px] md:h-[380px] rounded-xl bg-sky-600 translate-x-4 translate-y-4 opacity-20" />
 
           {/* IMAGE */}
-          <div className="relative z-10 w-[340px] h-[340px] md:w-[380px] md:h-[380px] rounded-xl overflow-hidden shadow-xl border border-sky-200 bg-white">
+          <div className="relative z-10 w-[340px] h-[340px] md:w-[380px] md:h-[380px] rounded-xl overflow-hidden shadow-xl border border-sky-200 bg-white ">
             <Image
               src="/photos/profile.jpg"
-              alt="Ama Kuatcha"
+              alt="Edith EHLO"
               fill
               priority
-              className="object-cover"
+              className="object-cover object-[50%_13%]"
             />
           </div>
         </motion.div>

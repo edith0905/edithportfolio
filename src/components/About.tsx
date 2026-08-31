@@ -20,10 +20,10 @@ export function About({ aboutRef }: AboutProps) {
   return (
     <motion.section
       ref={aboutRef}
-      id="about"
       className="min-h-screen bg-white"
       initial="hidden"
-      animate="visible"
+      whileInView="visible"
+      viewport={{ amount: 0.6 }}
       variants={{ visible: { transition: { staggerChildren: 0.25 } } }}
     >
       <div className="max-w-6xl mx-auto px-6 py-24">
@@ -52,7 +52,7 @@ export function About({ aboutRef }: AboutProps) {
                   src="/photos/profile.jpg"
                   alt="EHLO Abra Elom Edith"
                   fill
-                  className="object-cover rounded-full border-4 border-sky-200 shadow-xl"
+                  className="object-cover object-[50%_13%] rounded-full border-4 border-sky-200 shadow-xl"
                 />
               </div>
             </div>
@@ -132,7 +132,7 @@ export function About({ aboutRef }: AboutProps) {
             </h3>
 
             <p className="text-lg text-gray-700 leading-relaxed mb-16">
-              Diplomée d&apos;une licence en Mathématiques à l&apos;université de Lomé, développeuse web, je suis passionnée par la création d’interfaces modernes, performantes et élégantes et par l&apos;innovation technologique. Mon expérience en tant que développeuse Web a renforcé ma passion pour la création de solutions numériques, j’aide les entreprises et entrepreneurs à concrétiser leurs idées digitales. Je souhaite approfondir mes compétences et évoluer dans le domaine du développement informatique, tout en valorisant mes acquis et en poursuivant mon engagement vers l&apos;excellence.
+              Diplômée d’une licence en mathématiques à l’Université de Lomé, je suis développeuse web en grande partie autodidacte, passionnée par la création d’interfaces modernes, performantes et élégantes. J’accompagne entreprises et entrepreneurs dans la conception de solutions numériques innovantes. Curieuse et engagée, je continue à renforcer mes compétences en développement informatique afin de proposer des expériences digitales de qualité.
             </p>
 
             {/* EXPERIENCE */}

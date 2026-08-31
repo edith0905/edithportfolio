@@ -181,7 +181,7 @@ export function Contact({ contactRef }: ContactProps) {
                 <div className="text-center">
                   <button
                     type="submit"
-                    className="px-10 py-3 bg-sky-600 text-white rounded-full font-medium hover:bg-sky-700 transition"
+                    className="px-10 py-3 bg-sky-600 text-white rounded-full font-medium hover:bg-sky-700 cursor-pointer transition"
                   >
                     Envoyer
                   </button>
